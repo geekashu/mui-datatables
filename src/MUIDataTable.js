@@ -516,23 +516,13 @@ class MUIDataTable extends React.Component {
           activeColumn: index,
         };
 
-        if (this.options.serverSide) {
-          newState = {
-            ...newState,
-            data: prevState.data,
-            displayData: prevState.displayData,
-            selectedRows: prevState.selectedRows,
-          };
-        } else {
-          const sortedData = this.sortTable(data, index, order);
-
-          newState = {
-            ...newState,
-            data: sortedData.data,
-            displayData: this.getDisplayData(columns, sortedData.data, prevState.filterList, prevState.searchText),
-            selectedRows: sortedData.selectedRows,
-          };
-        }
+        const sortedData = this.sortTable(data, index, order);
+        newState = {
+          ...newState,
+          data: sortedData.data,
+          displayData: this.getDisplayData(columns, sortedData.data, prevState.filterList, prevState.searchText),
+          selectedRows: sortedData.selectedRows,
+        };
 
         return newState;
       },
